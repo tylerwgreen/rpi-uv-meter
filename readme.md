@@ -1,4 +1,4 @@
-# rpi_exposure_controller
+# rpi_uv_meter
 
 ## Dependencies
 
@@ -86,3 +86,4 @@ Uvindex | uvaread | uvbread | uvarpm | uvbrpm
 ## Wiring / Hardware
 ![Breadboard](https://github.com/tylerwgreen/rpi-exposure-controller/blob/production/schematics/breadboard.png)
 ![Schematic](https://github.com/tylerwgreen/rpi-exposure-controller/blob/production/schematics/schematic.png)
+
