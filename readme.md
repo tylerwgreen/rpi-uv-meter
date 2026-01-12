@@ -8,14 +8,14 @@
 
 #### Additional Software
 
-OpenSSH Client: Feature-rich SSH, SFTP and SCP client
-Node.js: JavaScript runtime environment
-Build-Essential: GNU C/C++ compiler, development libraries and headers
-Git: Clone and manage Git repositories locally
-Vim-Tiny: compact release of vim
-DietPi-RAMlog: Makes /var/log a RAM disk, preserves file structure on reboot
-OpenSSH Server: Feature-rich SSH server with SFTP and SCP support
-Python 3: Runtime system, pip package installer and development headers
+- OpenSSH Client: Feature-rich SSH, SFTP and SCP client
+- Node.js: JavaScript runtime environment
+- Build-Essential: GNU C/C++ compiler, development libraries and headers
+- Git: Clone and manage Git repositories locally
+- Vim-Tiny: compact release of vim
+- DietPi-RAMlog: Makes /var/log a RAM disk, preserves file structure on reboot
+- OpenSSH Server: Feature-rich SSH server with SFTP and SCP support
+- Python 3: Runtime system, pip package installer and development headers
 
 #### DietPi config
 DietPi auto update uses a lot of CPU on boot, this caused poor performance on the Raspberry Pi Zero
@@ -27,7 +27,7 @@ CONFIG_CHECK_DIETPI_UPDATES=0
 CONFIG_CHECK_APT_UPDATES=0
 ```
 
-#####Advanced Options
+##### Advanced Options
 ```dietpi-config```
 I2C Frequency:	100kHz
 
@@ -63,7 +63,7 @@ Use a 6Kohm resistor to ensure that current from a 3.3V source cannot exceed 0.5
 
 ## crontab
 ```
-0 1 * * * sudo bash ~/rpi-exposure-controller/shell/cron.sh
+0 1 * * * sudo bash ~/rpi-uv-meter/shell/cron.sh
 ```
 
 ## autostart
@@ -71,7 +71,7 @@ Use a 6Kohm resistor to ensure that current from a 3.3V source cannot exceed 0.5
 /var/lib/dietpi/dietpi-autostart/custom.sh
 ```
 ```
-~/rpi-exposure-controller/shell/autostart.sh
+~/rpi-uv-meter/shell/autostart.sh
 exit 0
 ```
 
@@ -84,6 +84,6 @@ Uvindex | uvaread | uvbread | uvarpm | uvbrpm
 1 | 1100 | 0190 | 260000 | 039000
 
 ## Wiring / Hardware
-![Breadboard](https://github.com/tylerwgreen/rpi-exposure-controller/blob/production/schematics/breadboard.png)
-![Schematic](https://github.com/tylerwgreen/rpi-exposure-controller/blob/production/schematics/schematic.png)
+![Breadboard](https://github.com/tylerwgreen/rpi-uv-meter/blob/production/schematics/breadboard.png)
+![Schematic](https://github.com/tylerwgreen/rpi-uv-meter/blob/production/schematics/schematic.png)
 

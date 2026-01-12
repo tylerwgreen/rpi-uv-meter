@@ -1,3 +1,3 @@
 #!/bin/bash
-sudo node ~/rpi-exposure-controller/app.js
+sudo node ~/rpi-uv-meter/app.js
 exit 0
