@@ -1,20 +1,20 @@
 const {Board, LCD} = require('johnny-five');
 const RaspiIO = require('raspi-io').RaspiIO;
 
-var gpioLcdScreen = {
+var gpioLcdScreenTest = {
 	_logger: null,
 	_board: null,
 	_lcd: null,
-	init: function(logger, config){
-		gpioLcdScreen._logger = logger.getLogger('gpioLcdScreen', config.consoleLoggingLevel);
-		gpioLcdScreen._logger.debug('gpioLcdScreen.init()');
-		gpioLcdScreen._logger.verbose('initializing gpioLcdScreen');
+	init: function(config){ // init: function(logger, config){
+		// gpioLcdScreenTest._logger = logger.getLogger('gpioLcdScreen', config.consoleLoggingLevel);
+		// gpioLcdScreenTest._logger.debug('gpioLcdScreenTest.init()');
+		// gpioLcdScreenTest._logger.verbose('initializing gpioLcdScreen');
 		return new Promise((resolve, reject) => {
-			gpioLcdScreen._board = new Board({
+			gpioLcdScreenTest._board = new Board({
 				io: new RaspiIO(),
 				debug: config.boardDebug,
 			});
-			gpioLcdScreen._board.on('ready', () => {
+			gpioLcdScreenTest._board.on('ready', () => {
 				// for whatever reason, >> is printed to the console after the board is ready, add a new line to keep the conole log pretty
 				console.log();
 				// ==========
@@ -28,19 +28,19 @@ var gpioLcdScreen = {
 				// will ALWAYS OVERRIDE any per-sensor
 				// interval/rate/frequency settings.
 				// ==========
-				// gpioLcdScreen._board.samplingInterval(1000);
-				gpioLcdScreen._board.i2cConfig();
-				gpioLcdScreen._lcd = new LCD({
+				// gpioLcdScreenTest._board.samplingInterval(1000);
+				gpioLcdScreenTest._board.i2cConfig();
+				gpioLcdScreenTest._lcd = new LCD({
 					controller: config.lcdType,
 					address: config.i2cAddress,
 				});
-				gpioLcdScreen._logger.info('gpioLcdScreen initialized');
+				// gpioLcdScreenTest._logger.info('gpioLcdScreen initialized');
 				resolve('gpioLcdScreen initialized');
 			});
 		});
 	},
 	_trimText: function(text){
-		gpioLcdScreen._logger.silly('gpioLcdScreen._trimText()');
+		// gpioLcdScreenTest._logger.silly('gpioLcdScreenTest._trimText()');
 		text = '' + text;
 		text = text + '                ';
 		text = text.slice(0, 16);
@@ -48,30 +48,30 @@ var gpioLcdScreen = {
 	},
 	lines: {
 		reset: function(){
-			gpioLcdScreen._logger.debug('gpioLcdScreen.lines.reset()');
+			// gpioLcdScreenTest._logger.debug('gpioLcdScreenTest.lines.reset()');
 			return new Promise((resolve, reject) => {
-				gpioLcdScreen._lcd.clear();
+				gpioLcdScreenTest._lcd.clear();
 				resolve();
 			});
 		},
 		top: {
 			update: function(text){
-				gpioLcdScreen._logger.silly('gpioLcdScreen.lines.top.update()');
+				// gpioLcdScreenTest._logger.silly('gpioLcdScreenTest.lines.top.update()');
 				return new Promise((resolve, reject) => {
-					gpioLcdScreen._lcd.cursor(0, 0).print(gpioLcdScreen._trimText(text));
+					gpioLcdScreenTest._lcd.cursor(0, 0).print(gpioLcdScreenTest._trimText(text));
 					resolve();
 				});
 			}
 		},
 		bottom: {
 			update: function(text){
-				gpioLcdScreen._logger.silly('gpioLcdScreen.lines.bottom.update()');
+				// gpioLcdScreenTest._logger.silly('gpioLcdScreenTest.lines.bottom.update()');
 				return new Promise((resolve, reject) => {
-					gpioLcdScreen._lcd.cursor(1, 0).print(gpioLcdScreen._trimText(text));
+					gpioLcdScreenTest._lcd.cursor(1, 0).print(gpioLcdScreenTest._trimText(text));
 					resolve();
 				});
 			}
 		}
 	},
 }
-module.exports = gpioLcdScreen;
+module.exports = gpioLcdScreenTest;

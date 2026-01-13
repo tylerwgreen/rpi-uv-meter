@@ -20,7 +20,8 @@ tasks:
     welcome:
         pauseDurationMs: 1000 # milliseconds
     read:
-        intervalMs: 1000 # milliseconds (should not be faster than 800ms, the slowest sensor integration time)
+        intervalMs: 250 # milliseconds
+        # intervalMs: 1000 # milliseconds (should not be faster than 800ms, the slowest sensor integration time)
     # settings:
         # lcdInterval: 250 # milliseconds
         # exposure:
@@ -35,7 +36,9 @@ peripherals:
     lcdScreen:
         config:
             consoleLoggingLevel: warn
-            address: 0x20
+            boardDebug: true
+            lcdType: LCM1602
+            i2cAddress: 0x20
     # giopReset:
         # config:
             # consoleLoggingLevel: warn
@@ -82,7 +85,7 @@ peripherals:
             logReadingsToConsole: true
             dynamicRangeHigh: false # HD mode increases the bit depth, but requires manual coefficients calibration
             integrationTimesMs: [50, 100, 200, 400, 800] # (50ms is default)
-            integrationTimeInitialIndex: 4 # 0-4
+            integrationTimeInitialIndex: 0 # 0-4
             reconfigureSensorIntervalMs: 1000 # Should be greater than highest possible integration time
             bus:
                 number: 1
