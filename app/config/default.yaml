@@ -20,8 +20,7 @@ tasks:
     welcome:
         pauseDurationMs: 1000 # milliseconds
     read:
-        intervalMs: 250 # milliseconds
-        # intervalMs: 1000 # milliseconds (should not be faster than 800ms, the slowest sensor integration time)
+        intervalMs: 50 # milliseconds
     # settings:
         # lcdInterval: 250 # milliseconds
         # exposure:

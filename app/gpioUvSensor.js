@@ -171,7 +171,7 @@ isReconfiguring: false,
 				gpioUvSensor._logger.silly('gpioUvSensor.measurement._tick.readSensor()');
 if(false === gpioUvSensor.measurement._tick.isReconfiguring){
 					gpioUvSensor._readSensor();
-					gpioUvSensor.measurement._convertData();
+					// gpioUvSensor.measurement._convertData();
 }
 			},
 			reconfigureSensor: function(){
@@ -287,6 +287,7 @@ uvb_resp = uva_resp / gpioUvSensor._integrationTimeMs;
 		},
 		get: function(){
 			gpioUvSensor._logger.silly('gpioUvSensor.measurement.get()');
+			gpioUvSensor.measurement._convertData();
 			return gpioUvSensor.measurement._data;
 		}
 	},
