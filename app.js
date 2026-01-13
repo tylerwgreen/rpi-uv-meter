@@ -84,7 +84,7 @@ var app = {
 			return new Promise((resolve, reject) => {
 				app.peripherals.lcdScreen.update.top('Welcome!')
 				.then(result => {
-					return app.peripherals.lcdScreen.update.bottom(app.date.getDate());
+					return app.peripherals.lcdScreen.update.bottom(app.date.getDate() + '|' + app.date.getTime());
 				})
 				.then(result => {
 					// pause welcome screen

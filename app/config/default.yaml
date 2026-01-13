@@ -18,9 +18,9 @@ cache:
     id: cache.json
 tasks:
     welcome:
-        pauseDurationMs: 2000 # milliseconds
+        pauseDurationMs: 1000 # milliseconds
     read:
-        intervalMs: 800 # milliseconds
+        intervalMs: 1000 # milliseconds (should not be faster than 800ms, the slowest sensor integration time)
     # settings:
         # lcdInterval: 250 # milliseconds
         # exposure:
