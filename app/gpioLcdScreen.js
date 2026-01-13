@@ -32,7 +32,7 @@ var gpioLcdScreen = {
 				gpioLcdScreen._board.i2cConfig();
 				gpioLcdScreen._lcd = new LCD({
 					controller: config.lcdType,
-					address: config.i2cAddress,
+					address: config.bus.address,
 				});
 				gpioLcdScreen._logger.info('gpioLcdScreen initialized');
 				resolve('gpioLcdScreen initialized');

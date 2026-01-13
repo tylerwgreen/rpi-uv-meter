@@ -14,70 +14,20 @@ logger:
     consoleLoggingLevel: debug # overall logging level
 app:
     consoleLoggingLevel: warn
-cache:
-    id: cache.json
 tasks:
     welcome:
         pauseDurationMs: 1000 # milliseconds
     read:
         intervalMs: 50 # milliseconds
-    # settings:
-        # lcdInterval: 250 # milliseconds
-        # exposure:
-            # increments: 25000 # uv accumulated per min
-            # max: 50000000
-            # min: 100000
-    # exposure:
-        # lcdInterval: 500 # milliseconds
-        # buzzIncrement: 50000 # uv accumulated per min
-        # maxMissingUVReadings: 10 # will stop exposure if xx UV readings are missed
 peripherals:
     lcdScreen:
         config:
             consoleLoggingLevel: warn
             boardDebug: true
             lcdType: LCM1602
-            i2cAddress: 0x20
-    # giopReset:
-        # config:
-            # consoleLoggingLevel: warn
-    # buttons:
-        # config:
-            # consoleLoggingLevel: warn
-            # debounceMs: 500 # milliseconds
-            # holdDelay: 500 # milliseconds
-            # holdRepeat: 100 # milliseconds
-        # buttons:
-            # exposureUp:
-                # gpioPin: 27
-            # exposureDown:
-                # gpioPin: 22
-            # exposureStart:
-                # gpioPin: 17
-            # exposureStop:
-                # gpioPin: 4
-    # leds:
-        # config:
-            # consoleLoggingLevel: warn
-        # leds:
-            # ledGreen:
-                # gpioPin: 16
-            # ledRed:
-                # gpioPin: 21
-            # ledYellow:
-                # gpioPin: 20
-    # buzzer:
-        # config:
-            # consoleLoggingLevel: warn
-            # gpioPin: 26
-    # relays:
-        # config:
-            # consoleLoggingLevel: warn
-        # relays:
-            # relayA:
-                # gpioPin: 14
-            # relayB:
-                # gpioPin: 15
+            bus:
+                number: 1
+                address: 0x20
     uvSensor:
         config:
             consoleLoggingLevel: warn
