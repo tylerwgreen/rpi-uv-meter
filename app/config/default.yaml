@@ -18,12 +18,13 @@ tasks:
     welcome:
         pauseDurationMs: 1000 # milliseconds
     read:
-        intervalMs: 50 # milliseconds
+        # intervalMs: 50 # milliseconds
+        intervalMs: 1000 # milliseconds
 peripherals:
     lcdScreen:
         config:
             consoleLoggingLevel: warn
-            boardDebug: true
+            boardDebug: false
             lcdType: LCM1602
             bus:
                 number: 1
@@ -31,11 +32,12 @@ peripherals:
     uvSensor:
         config:
             consoleLoggingLevel: warn
-            logReadingsToConsole: true
-            dynamicRangeHigh: false # HD mode increases the bit depth, but requires manual coefficients calibration
-            integrationTimesMs: [50, 100, 200, 400, 800] # (50ms is default)
-            integrationTimeInitialIndex: 0 # 0-4
-            reconfigureSensorIntervalMs: 1000 # Should be greater than highest possible integration time
+            logReadingsToConsole: false
+            dynamicRangeHigh: false # HD mode increases the bit depth, but requires manual coefficients calibration, false or normal is the default
+            integrationTimesMs: [50, 100, 200, 400, 800] # (100ms is default)
+            integrationTimeInitialIndex: 4 # 0-4
+            readSensorIntervalMs: 50
+            reconfigureSensorIntervalMs: 5000 # Should be greater than highest possible integration time and allow time for sensor reading lag after reconfiguration
             bus:
                 number: 1
                 address: 0x10

@@ -46,26 +46,23 @@ var app = {
 			});
 		},
 		read: function(){
-			app.logger.silly('app.tasks.read()');
+			app.logger.debug('app.tasks.read()');
 			var interval = setInterval(function(){
+				var maxReadingPadding = 5; // The VEML6075 sensor outputs UVA and UVB light intensity as 16-bit digital values, meaning the maximum raw value for each channel is 65,535 counts.
 				var data = app.peripherals.uvSensor.readings.get();
 				// console.log(data);
 				// console.log('a|' + data.uva.read + '|' + data.uva.accumulated + '|b|' + data.uvb.read + '|' + data.uvb.accumulated + '|s|' + data.elapsedSec);
-				app.peripherals.lcdScreen.update.top(data.uva.adj);
-				app.peripherals.lcdScreen.update.bottom(data.uvb.adj);
-				/*
+				// app.peripherals.lcdScreen.shortenNumber(data.uvb.calc)
 				app.peripherals.lcdScreen.update.top(
-					'UVA/Min' + app.peripherals.lcdScreen.padTextLeft(
-						app.peripherals.lcdScreen.shortenNumber(data.uva.readPerMin)
-					, app.tasks.settings._lcd.textPadding.uva)
+					app.peripherals.lcdScreen.padTextLeft(Math.round(data.uva.irra.mwm2), maxReadingPadding)
+					+ app.peripherals.lcdScreen.padTextLeft(data.uvIndex.index.toFixed(1), 6)
+					+ app.peripherals.lcdScreen.padTextLeft(data.config.it, 5)
 				);
 				app.peripherals.lcdScreen.update.bottom(
-					'Xp' + app.peripherals.lcdScreen.padTextLeft(
-						app.peripherals.lcdScreen.shortenNumber(exposure)
-						+ ' ' + app.tasks.settings._lcd._getExposureTime(exposure)
-					, app.tasks.settings._lcd.textPadding.exposure)
+					app.peripherals.lcdScreen.padTextLeft(Math.round(data.uvb.irra.mwm2), maxReadingPadding)
+					+ app.peripherals.lcdScreen.padTextLeft(data.visBlue.counts.raw + data.visCyan.counts.raw, 6)
+					+ app.peripherals.lcdScreen.padTextLeft(data.uvIndex.level, 5)
 				);
-				*/
 			}, app.config.get('tasks.read.intervalMs'));
 		},
 	},

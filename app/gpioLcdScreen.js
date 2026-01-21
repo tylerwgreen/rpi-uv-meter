@@ -8,7 +8,6 @@ var gpioLcdScreen = {
 	init: function(logger, config){
 		gpioLcdScreen._logger = logger.getLogger('gpioLcdScreen', config.consoleLoggingLevel);
 		gpioLcdScreen._logger.debug('gpioLcdScreen.init()');
-		gpioLcdScreen._logger.verbose('initializing gpioLcdScreen');
 		return new Promise((resolve, reject) => {
 			gpioLcdScreen._board = new Board({
 				io: new RaspiIO(),
