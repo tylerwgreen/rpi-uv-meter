@@ -210,12 +210,22 @@ var gpioUvSensor = {
 			var uvb_d_coef = 1.74; // Default value for the UVB IR coefficient ("d")
 			var uva_resp = 0.001461; // UVA responsivity (UVI per count)
 			var uvb_resp = 0.002591; // UVB responsivity (UVI per count)
+			
+			
+			// var uva_a_coef = 3.33; // Default value for the UVA VIS coefficient ("a")
+			// var uva_b_coef = 2.5; // Default value for the UVA IR coefficient ("b")
+			// var uvb_c_coef = 3.66; // Default value for the UVB VIS coefficient ("c")
+			// var uvb_d_coef = 2.75; // Default value for the UVB IR coefficient ("d")
+			// var uva_resp = 0.001461; // UVA responsivity (UVI per count)
+			// var uvb_resp = 0.002591; // UVB responsivity (UVI per count)
+			
+			
 			// calculated uva/uvb (for light outside the UVa/UVb spectrums, UVcomp1 and UVcomp2 should be low under LEDs) [These gain calibration factors, α, β, γ, δ, correct the output ratios of each channel for the device under test (DUT) in reference to the golden sample under a solar simulator, such as the Newport LCS100.]
 			// in short, this removes the noise of blue and cyan from the uva/uvb readings
 			var uvaCalc = gpioUvSensor._sensorReadings.uva - (uva_a_coef * gpioUvSensor._sensorReadings.uvcomp1) - (uva_b_coef * gpioUvSensor._sensorReadings.uvcomp2); // UVAcalc = UVA - a x UVcomp1 - b x UVcomp2 = 0 Eq. (6)
 			var uvbCalc = gpioUvSensor._sensorReadings.uvb - (uvb_c_coef * gpioUvSensor._sensorReadings.uvcomp1) - (uvb_d_coef * gpioUvSensor._sensorReadings.uvcomp2); // UVBcalc = UVB - c x UVcomp1 - d x UVcomp2 = 0 Eq. (7)
 			// normalize for variable integration time
-			var responsivityIntegrationTime = 100 // test condition integration time used for determining the UV COEFFICIENTS AND RESPONSIVITY table (milliseconds)
+			var responsivityIntegrationTime = 100; // test condition integration time used for determining the UV COEFFICIENTS AND RESPONSIVITY table (milliseconds)
 			var uvaCalcNorm = uvaCalc / (gpioUvSensor._integrationTimeMs / responsivityIntegrationTime);
 			var uvbCalcNorm = uvbCalc / (gpioUvSensor._integrationTimeMs / responsivityIntegrationTime);
 			// calculate irradiance
@@ -228,9 +238,8 @@ var gpioUvSensor = {
 			// convert to standard mW/m² (milliwatts per square meter)
 			var uvaMilliwattsPerSquareMeter = uvaMicrowattsPerSquareCentimeter * 10;
 			var uvbMilliwattsPerSquareMeter = uvbMicrowattsPerSquareCentimeter * 10;
-// TODO:
-			var uvIndex = ((uvaCalcNorm * uva_resp) + (uvbCalcNorm * uvb_resp)) / 2;
-			
+// TODO: is this accurate enough? check: https://orange-nc.weatherstem.com/unc
+			var uvIndex = (uvaCalcNorm * uva_resp) + (uvbCalcNorm * uvb_resp);
 			// uv index level
 			var uvIndexLevel = 0;
 			var uvIndexLevelText = 'Very Low';
@@ -326,8 +335,8 @@ var gpioUvSensor = {
 				// '|Bn~',		_d.uvb.counts.calcNorm				.toString().padStart(6),
 				// '|Indx',	(!_d.uvIndex.index ? 0 : _d.uvIndex.index)		.toString().padStart(5),
 				'|Indx',	(Math.round((!_d.uvIndex.index ? 0 : _d.uvIndex.index)*10)/10)		.toString().padStart(5),
-				'|Ilvl',	(!_d.uvIndex.level ? 0 : _d.uvIndex.level)		.toString().padStart(1),
-				'|Itxt',	(!_d.uvIndex.text ? 0 : _d.uvIndex.text)		.toString().padStart(9),
+				// '|Ilvl',	(!_d.uvIndex.level ? 0 : _d.uvIndex.level)		.toString().padStart(1),
+				// '|Itxt',	(!_d.uvIndex.text ? 0 : _d.uvIndex.text)		.toString().padStart(9),
 			);
 			return;
 		},

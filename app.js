@@ -55,8 +55,8 @@ var app = {
 				// app.peripherals.lcdScreen.shortenNumber(data.uvb.calc)
 				app.peripherals.lcdScreen.update.top(
 					app.peripherals.lcdScreen.padTextLeft(Math.round(data.uva.irra.mwm2), maxReadingPadding)
-					+ app.peripherals.lcdScreen.padTextLeft(data.uvIndex.index.toFixed(1), 6)
-					+ app.peripherals.lcdScreen.padTextLeft(data.config.it, 5)
+					+ app.peripherals.lcdScreen.padTextLeft(data.config.it, 6)
+					+ app.peripherals.lcdScreen.padTextLeft(data.uvIndex.index.toFixed(1), 5)
 				);
 				app.peripherals.lcdScreen.update.bottom(
 					app.peripherals.lcdScreen.padTextLeft(Math.round(data.uvb.irra.mwm2), maxReadingPadding)
